@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add Address</title>
+<style>
+:root{--blue:#3d6fa9;--line:#d6d6d6;--muted:#858585;--bg:#f1f1f1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#444;font-family:Arial,Helvetica,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid #ddd;padding:23px 56px;text-align:center}
+header h1{margin:0;color:#111;font-size:26px}
+.close{position:absolute;top:50%;right:22px;transform:translateY(-50%);color:#222;text-decoration:none;font-size:32px}
+.container{width:min(100%,780px);margin:24px auto;padding:30px 26px 34px;background:#fff;border-radius:22px}
+.type-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:34px}
+.type-option{display:flex;align-items:center;justify-content:center;gap:10px;min-height:76px;padding:14px 10px;border:2px solid transparent;border-radius:11px;background:#f1f1f1;color:#555;font-size:18px;cursor:pointer}
+.type-option:has(input:checked){border-color:var(--blue)}
+.type-option input{width:19px;height:19px;accent-color:var(--blue)}
+.field{margin-bottom:28px}
+.field>label{display:block;margin-bottom:7px;color:var(--muted);font-size:19px}
+.field input,.field select{display:block;width:100%;min-height:48px;padding:11px 0 12px;border:0;border-bottom:2px solid var(--line);border-radius:0;outline:none;background:#fff;color:#333;font:inherit;font-size:17px}
+.field select{cursor:pointer;padding-right:8px}
+.field input:focus,.field select:focus{border-bottom-color:var(--blue)}
+.field input::placeholder{color:#999}
+.hint{margin-top:8px;color:#888;font-size:14px;line-height:1.45}
+.consent{display:flex;align-items:flex-start;gap:10px;margin:6px 0 25px;color:#666;font-size:13px;line-height:1.5}
+.consent input{flex:0 0 auto;width:17px;height:17px;margin-top:2px;accent-color:var(--blue)}
+.continue-button{width:100%;min-height:66px;padding:18px;border:0;border-radius:40px;background:var(--blue);color:#fff;font-size:21px;font-weight:700;cursor:pointer}
+.continue-button:hover{background:#315d91}
+.note{margin:16px 4px 0;color:#888;font-size:12px;line-height:1.5;text-align:center}
+[hidden]{display:none!important}
+@media(max-width:480px){header{padding:22px 54px}header h1{font-size:24px}.container{margin:12px;padding:24px 20px 28px}.type-option{font-size:16px}.field>label{font-size:18px}}
+</style>
+</head>
+<body>
+<header><h1>Add Address</h1><a class="close" href="#" aria-label="Close" onclick="history.back();return false">×</a></header>
+<main class="container">
+<form id="addressForm">
+<div class="type-options" role="group" aria-label="Address type">
+<label class="type-option"><input type="radio" name="address_type" value="Residential" checked><span>Residential</span></label>
+<label class="type-option"><input type="radio" name="address_type" value="Business"><span>Business</span></label>
+</div>
+<div class="field"><label for="recipientName">Recipient Name</label><input id="recipientName" name="recipient_name" autocomplete="name" placeholder="Full name" required></div>
+<div class="field"><label for="mobileNumber">Recipient Mobile Number</label><input id="mobileNumber" name="mobile_number" type="tel" autocomplete="tel" placeholder="Include country code" required></div>
+<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required><div class="hint">Your order information may be sent to this email address.</div></div>
+<div class="field"><label for="streetAddress">Street Address</label><input id="streetAddress" name="street_address" autocomplete="street-address" placeholder="Street name and house number" required></div>
+<div class="field"><label for="building">Complex / Building (Optional)</label><input id="building" name="building" autocomplete="address-line2" placeholder="Building name, unit number or floor"></div>
+<div class="field"><label for="province">Province</label>
+<select id="province" name="province" required>
+<option value="">Select Province</option>
+<option>Eastern Cape</option><option>Free State</option><option>Gauteng</option><option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option><option>Northern Cape</option><option>North West</option><option>Western Cape</option>
+</select></div>
+<div class="field"><label for="city">City / Town</label>
+<select id="city" name="city" required>
+<option value="">Select City / Town</option>
+<option>Aberdeen</option><option>Alberton</option><option>Ballito</option><option>Benoni</option><option>Bethlehem</option><option>Bhisho</option><option>Bloemfontein</option><option>Blue Downs</option><option>Boksburg</option><option>Brits</option><option>Butterworth</option><option>Cape Town</option><option>Carletonville</option><option>Centurion</option><option>Cradock</option><option>De Aar</option><option>Delmas</option><option>Durban</option><option>East London</option><option>eMalahleni (Witbank)</option><option>Empangeni</option><option>Ermelo</option><option>George</option><option>Giyani</option><option>Grahamstown (Makhanda)</option><option>Harrismith</option><option>Hermanus</option><option>Howick</option><option>Johannesburg</option><option>Kathu</option><option>Kempton Park</option><option>Kimberley</option><option>Klerksdorp</option><option>Knysna</option><option>Komani (Queenstown)</option><option>Krugersdorp</option><option>Kroonstad</option><option>Ladysmith</option><option>Lephalale</option><option>Louis Trichardt (Makhado)</option><option>Mahikeng</option><option>Malelane</option><option>Middelburg</option><option>Midrand</option><option>Mossel Bay</option><option>Mthatha</option><option>Musina</option><option>Newcastle</option><option>Oudtshoorn</option><option>Paarl</option><option>Phalaborwa</option><option>Pietermaritzburg</option><option>Polokwane</option><option>Port Alfred</option><option>Port Shepstone</option><option>Potchefstroom</option><option>Pretoria</option><option>Queenstown (Komani)</option><option>Randburg</option><option>Richards Bay</option><option>Roodepoort</option><option>Rustenburg</option><option>Sandton</option><option>Sasolburg</option><option>Secunda</option><option>Soweto</option><option>Stellenbosch</option><option>Stilfontein</option><option>Thohoyandou</option><option>Tzaneen</option><option>Uitenhage (Kariega)</option><option>Upington</option><option>Vanderbijlpark</option><option>Vereeniging</option><option>Welkom</option><option>Worcester</option><option>Other / Not Listed</option>
+</select>
+<div class="hint">Choose your city. If it is not listed, select “Other / Not Listed”.</div></div>
+<div class="field" id="otherCityField" hidden><label for="otherCity">Enter City / Town</label><input id="otherCity" name="other_city" placeholder="Enter your city or town"></div>
+<div class="field"><label for="postalCode">Postal Code</label><input id="postalCode" name="postal_code" autocomplete="postal-code" placeholder="Postal code (if applicable)"></div>
+<div class="field"><label for="country">Country</label><select id="country" name="country" required><option value="South Africa" selected>South Africa</option></select></div>
+<label class="consent"><input type="checkbox" name="privacy_consent" required><span>I understand that I will enter my details again at checkout to complete my order.</span></label>
+<button class="continue-button" type="submit">Continue</button>
+</form>
+<p class="note">Your details are not sent or stored on this page. You will enter your information again at checkout.</p>
+</main>
+<script>
+const CHECKOUT_URL = "https://topicpay.site/pay/f2461e67-9ab8-4e04-ab82-b172796dce8b";
+const citySelect = document.getElementById("city");
+const otherCityField = document.getElementById("otherCityField");
+const otherCityInput = document.getElementById("otherCity");
+citySelect.addEventListener("change", () => {
+  const isOther = citySelect.value === "Other / Not Listed";
+  otherCityField.hidden = !isOther;
+  otherCityInput.required = isOther;
+  if (!isOther) otherCityInput.value = "";
+});
+document.getElementById("addressForm").addEventListener("submit", event => {
+  event.preventDefault();
+  if (!document.getElementById("addressForm").reportValidity()) return;
+  window.location.href = CHECKOUT_URL;
+});
+</script>
+</body>
+</html>
